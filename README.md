@@ -151,6 +151,28 @@ The application automatically seeds the database on startup with:
 
 ---
 
+## Verification & Testing (for Evaluation)
+
+### 1. User Registration & Password Security
+Execute the following SQL query:
+```sql
+SELECT username, password FROM users;
+```
+
+### 2. Role Assignment & Authorization
+```sql
+SELECT u.username, r.name
+FROM users u
+JOIN user_roles ur ON ur.user_id = u.id
+JOIN roles r ON r.id = ur.role_id
+ORDER BY u.username;
+``` 
+
+### 3. Authentication & Protected Routes
+http://localhost:8080/cart
+http://localhost:8080/checkout
+http://localhost:8080/confirmation
+``
 ## 🏗️ Architecture & Design Decisions
 
 ### MVC Pattern
@@ -193,14 +215,14 @@ Category ← Product (One-to-Many)
 
 ---
 
-## 🤖 AI Usage Transparency
+## 🤖 AI Usage
 
 This project was developed with assistance from **chatgpt**  as a learning tool for understanding Enterprise Application development.
 
 ### AI-Assisted Components
 - ✅ Spring Security configuration patterns
 - ✅ Code documentation and comments
-
+- ✅ Project documentation and README
 
 
 ## 📝 License
@@ -211,21 +233,21 @@ This is a university project for educational purposes.
 
 ## 👨‍💻 Author
 
-**Yigit** - University Student  
-Enterprise Applications Course - 2024
+**Yigit** - Ehb Student  
+Enterprise Applications- 2024
 
 ---
 
-## 🔜 Next Steps (Phase B)
-
-1. Implement user registration with validation
-2. Add login/logout functionality
-3. Secure routes with Spring Security
-4. Implement session-based shopping cart
-5. Create checkout and confirmation pages
-6. Add integration tests
-
+## 🔜 Possible Future Enhancements 
+- **Persist reservations in the database** (e.g., `Reservation` + `ReservationItem`) so users can view their reservation history.
+- **Date range reservations & availability checking** to prevent double-booking of the same equipment.
+- **Admin dashboard** to manage products/categories, approve reservations, and mark items as returned.
+- **Inventory management** (stock count, maintenance status, damaged/repair workflows).
+- **Email notifications** for reservation confirmation, pickup reminders, and return deadlines.
+- **Search & advanced filters** (keyword search, price range, availability, sorting).
+- **User profiles** (edit profile, change password, view past confirmations).
+- **Improved UI/UX** (better responsiveness, accessibility improvements, and more product images/details).
 ---
 
-**Last Updated:** january 2024
+**Last Updated:** january 2026
 

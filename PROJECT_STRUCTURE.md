@@ -178,9 +178,9 @@ EntrepriseApplicationFinalProject/
 
 ---
 
-## 🔜 Phase B Preview
 
-The following will be added in Phase B:
+
+
 
 ```
 src/main/java/com/artsrental/equipment/
@@ -208,31 +208,4 @@ src/main/resources/templates/
 ```
 
 ---
-
-## 📝 Notes for Oral Defense
-
-### Key Points to Emphasize
-
-1. **Clean Architecture:** Strict separation of Controller → Service → Repository
-2. **Entity Design:** Category as entity (not enum) for flexibility
-3. **Security:** BCrypt password encoder configured (used in Phase B)
-4. **Data Seeding:** Automatic database population on startup
-5. **Filtering:** Spring Data JPA query derivation for category filtering
-6. **MVC Pattern:** Proper use of Model-View-Controller
-7. **Thymeleaf:** Server-side rendering (no React/Vue as per requirements)
-
-### Be Ready to Explain
-
-- Why we use `@Transactional`
-- How Spring Data JPA generates queries from method names
-- The difference between `FetchType.EAGER` and `LAZY`
-- Why we use DTOs (in Phase B)
-- How session-based authentication works (Phase B)
-- The role of `CommandLineRunner` in DataSeeder
-
----
-
-**Phase A Status:** ✅ COMPLETE  
-**Ready for:** Build, Run, and Demonstration  
-**Next Phase:** User Authentication & Shopping Cart
 
