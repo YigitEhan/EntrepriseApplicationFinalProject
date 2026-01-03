@@ -6,9 +6,31 @@
 
 ---
 
-## 📋 Project Overview
+## �‍🏫 For Professor - Quick Start
 
-## Overview
+### To Run This Project (3 Steps):
+
+```bash
+# 1. Clone the repository
+git clone [github-url]
+cd EntrepriseApplicationFinalProject
+
+# 2. Run the application (Maven Wrapper included - no installation needed)
+./mvnw spring-boot:run          # Linux/Mac
+.\mvnw.cmd spring-boot:run      # Windows
+
+# 3. Open browser
+http://localhost:8080
+```
+
+**Login credentials:** `student` / `password123`
+(testing purpose, wachtwoorden zijn wel encrypted)
+
+**Everything needed to run is in the repository. Just clone and run!**
+
+---
+
+## 📋 Project Overview
 This project is a proof-of-concept web application developed for the course **Enterprise Applications**.
 It simulates a platform for an arts education institute where registered students can browse technical equipment
 and reserve items for projects via a shopping cart and checkout confirmation flow.
@@ -52,36 +74,75 @@ No real payments are implemented.
 ## 📁 Project Structure
 
 ```
-src/main/java/com/artsrental/equipment/
-├── EquipmentRentalApplication.java    # Main application entry point
-├── config/
-│   └── SecurityConfig.java            # Spring Security configuration
-├── model/
-│   ├── User.java                      # User entity (M:N with Role)
-│   ├── Role.java                      # Role entity (RBAC)
-│   ├── Product.java                   # Product entity (M:1 with Category)
-│   └── Category.java                  # Category entity (1:N with Product)
-├── repository/
-│   ├── UserRepository.java            # User data access
-│   ├── RoleRepository.java            # Role data access
-│   ├── ProductRepository.java         # Product data access (with filtering)
-│   └── CategoryRepository.java        # Category data access
-├── service/
-│   ├── ProductService.java            # Product business logic
-│   └── CategoryService.java           # Category business logic
-├── controller/
-│   └── CatalogController.java         # Catalog & filtering controller
-└── seeder/
-    └── DataSeeder.java                # Database seeding on startup
-
-src/main/resources/
-├── application.properties             # Application configuration
-├── templates/
-│   └── catalog.html                   # Product catalog page
-└── static/
-    └── css/
-        └── style.css                  # Custom styles
+EntrepriseApplicationFinalProject/
+├── .mvn/wrapper/                      # Maven wrapper (DO NOT DELETE)
+│   ├── maven-wrapper.jar              # Required for mvnw to work
+│   └── maven-wrapper.properties
+├── docs/                              # 📚 Documentation for oral defense
+│   ├── ARCHITECTURE.md                # MVC architecture explanation
+│   ├── SECURITY.md                    # Spring Security & BCrypt details
+│   ├── DATA_MODEL.md                  # Entity relationships & design decisions
+│   └── PROJECT_STRUCTURE.md           # Detailed project structure
+├── src/main/java/com/artsrental/equipment/
+│   ├── EquipmentRentalApplication.java    # Main entry point
+│   ├── config/
+│   │   └── SecurityConfig.java            # Spring Security configuration
+│   ├── model/                             # Domain entities
+│   │   ├── User.java                      # User entity (M:N with Role)
+│   │   ├── Role.java                      # Role entity (RBAC)
+│   │   ├── Product.java                   # Product entity (M:1 with Category)
+│   │   └── Category.java                  # Category entity (1:N with Product)
+│   ├── repository/                        # Data access layer
+│   │   ├── UserRepository.java
+│   │   ├── RoleRepository.java
+│   │   ├── ProductRepository.java
+│   │   └── CategoryRepository.java
+│   ├── service/                           # Business logic layer
+│   │   ├── UserService.java               # Authentication & user management
+│   │   ├── CartService.java               # Session-based cart operations
+│   │   ├── ProductService.java
+│   │   └── CategoryService.java
+│   ├── controller/                        # Web layer (MVC)
+│   │   ├── AuthController.java            # Login & registration
+│   │   ├── CatalogController.java         # Product catalog & filtering
+│   │   ├── CartController.java            # Shopping cart
+│   │   └── CheckoutController.java        # Checkout & confirmation
+│   └── seeder/
+│       └── DataSeeder.java                # Auto-seed database on startup
+├── src/main/resources/
+│   ├── application.properties             # App configuration (H2, JPA, Security)
+│   ├── templates/                         # Thymeleaf HTML templates
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── catalog.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   └── confirmation.html
+│   └── static/
+│       ├── css/style.css                  # Custom styles
+│       └── images/                        # Product SVG images (12 files)
+├── .gitignore                             # Excludes target/, logs, IDE files
+├── Dockerfile                             # For Docker/Render deployment
+├── mvnw, mvnw.cmd                         # Maven wrapper scripts
+├── pom.xml                                # Maven dependencies
+└── README.md                              # This file
 ```
+
+### Important Files for Evaluation
+
+📄 **Documentation** (in `/docs` folder):
+- `ARCHITECTURE.md` - Explains MVC pattern, request flow, session cart
+- `SECURITY.md` - BCrypt hashing, Spring Security, authentication flow
+- `DATA_MODEL.md` - Entity relationships, design justifications
+
+🔧 **Configuration**:
+- `application.properties` - H2 database, JPA, Thymeleaf, logging
+- `SecurityConfig.java` - Spring Security setup, BCrypt encoder
+
+🗄️ **Database**:
+- H2 in-memory (no setup needed)
+- Auto-seeded via `DataSeeder.java`
+- Access console at `/h2-console`
 
 ---
 
@@ -215,14 +276,19 @@ Category ← Product (One-to-Many)
 
 ---
 
+## 📦 Repository & Version Control
+
+
 ## 🤖 AI Usage
 
-This project was developed with assistance from **chatgpt**  as a learning tool for understanding Enterprise Application development.
+This project was developed with assistance from **ChatGPT** as a learning tool for understanding Enterprise Application development.
 
 ### AI-Assisted Components
 - ✅ Spring Security configuration patterns
 - ✅ Code documentation and comments
 - ✅ Project documentation and README
+- ✅ Debugging and troubleshooting
+- ✅ Best practices for MVC architecture
 
 
 ## 📝 License
@@ -231,9 +297,76 @@ This is a university project for educational purposes.
 
 ---
 
-## deployed
-Live demo URL (Render – free tier, may spin down)
-deployed on render hence why i used docker
+## 🚢 Deployment
+
+### Live Demo
+**Deployed on Render:** [https://entrepriseapplicationfinalproject.onrender.com]
+*(Free tier - may take 30-60 seconds to spin up if inactive)*
+
+### Deployment Instructions for Professor
+
+This project is **ready to clone and run** with zero configuration needed.
+
+#### Quick Start (Local)
+```bash
+# Clone the repository
+git clone [your-github-url]
+cd EntrepriseApplicationFinalProject
+
+# Run with Maven Wrapper (no Maven installation required)
+./mvnw spring-boot:run          # Linux/Mac
+.\mvnw.cmd spring-boot:run      # Windows
+
+# Access at http://localhost:8080
+```
+
+
+
+### Docker Deployment (Optional)
+
+If you want to run with Docker:
+
+```bash
+# Build Docker image
+docker build -t arts-equipment-rental .
+
+# Run container
+docker run -p 8080:8080 arts-equipment-rental
+
+# Access at http://localhost:8080
+```
+
+### Cloud Deployment (Render)
+
+This project is deployed on **Render** using the included `Dockerfile`.
+
+**Render Configuration:**
+- **Build Command:** `docker build -t arts-rental .`
+- **Start Command:** Automatic (uses Dockerfile CMD)
+- **Environment:** Docker
+- **Port:** 8080 (auto-detected)
+
+**No environment variables needed** - everything runs with defaults.
+
+### Testing the Deployment
+
+Once running (local or cloud), test these endpoints:
+
+1. **Public Access:**
+   - `/login` - Should show login page
+   - `/register` - Should show registration page
+
+2. **After Login** (use `student` / `password123`):
+   - `/catalog` - Product catalog with filtering
+   - `/cart` - Shopping cart
+   - `/checkout` - Checkout page
+   - `/h2-console` - Database console (local only)
+
+3. **Database Verification** (H2 Console):
+   - JDBC URL: `jdbc:h2:mem:equipmentdb`
+   - Username: `sa`
+   - Password: *(empty)*
+   - Query: `SELECT * FROM users;` - Should show BCrypt hashed passwords
 
 ---
 
