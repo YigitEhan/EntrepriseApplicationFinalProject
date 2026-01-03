@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Arts Equipment Rental</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <h1>Login</h1>
+            
+            <!-- Error message -->
+            <div th:if="${error}" class="alert alert-error">
+                <p th:text="${error}">Error message</p>
+            </div>
+            
+            <!-- Success message (after registration) -->
+            <div th:if="${param.registered}" class="alert alert-success">
+                <p>Registration successful! Please login with your credentials.</p>
+            </div>
+            
+            <!-- Logout message -->
+            <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}">Success message</p>
+            </div>
+            
+            <form th:action="@{/login}" method="post" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            
+            <p class="auth-link">
+                Don't have an account? <a th:href="@{/register}">Register here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

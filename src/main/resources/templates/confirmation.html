@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmed - Arts Equipment Rental</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>Arts Equipment Rental</h1>
+            <div class="nav-links">
+                <a th:href="@{/catalog}">Catalog</a>
+                <a th:href="@{/cart}">Cart</a>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-link">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="confirmation-container">
+            <div class="confirmation-success">
+                <h2>✓ Reservation Confirmed!</h2>
+                <p class="confirmation-message">Thank you for your reservation.</p>
+            </div>
+            
+            <div class="confirmation-details">
+                <h3>Reservation Details</h3>
+                <p><strong>Confirmation Number:</strong> <span class="confirmation-number" th:text="${confirmationNumber}">RES-123456</span></p>
+                <p><strong>Customer:</strong> <span th:text="${username}">Username</span></p>
+                <p><strong>Date:</strong> <span th:text="${timestamp}">2024-01-01 12:00:00</span></p>
+                <p><strong>Total Items:</strong> <span th:text="${itemCount}">0</span></p>
+            </div>
+            
+            <div class="confirmation-items">
+                <h3>Reserved Items</h3>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price/day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="entry : ${cartItems}">
+                            <td th:text="${entry.key.name}">Product Name</td>
+                            <td th:text="${entry.value}">1</td>
+                            <td>€<span th:text="${#numbers.formatDecimal(entry.key.price, 1, 2)}">0.00</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="confirmation-actions">
+                <p class="confirmation-note">
+                    Please save your confirmation number for pickup reference.
+                </p>
+                <a th:href="@{/catalog}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

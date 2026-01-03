@@ -9,21 +9,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Spring Security Configuration (Phase A - Minimal).
- * 
- * Phase A: Permits all requests to allow testing of catalog functionality.
- * Phase B: Will add proper authentication, authorization, and session management.
- * 
- * Security Features (to be implemented in Phase B):
- * - BCrypt password encoding
- * - Session-based authentication
- * - Role-based access control
- * - CSRF protection
+ * Spring Security Configuration (Phase B).
+ *
+ * Phase B: Session-based authentication with form login.
+ * - BCrypt password hashing
+ * - Form-based login
+ * - Authorization rules for different endpoints
+ * - CSRF and frame options configured for H2 console in dev mode
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
     /**
      * BCrypt password encoder bean.
      * Used for hashing passwords (never store plaintext).
@@ -32,24 +29,46 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     /**
      * Security filter chain configuration.
-     * 
-     * Phase A: Permits all requests for development.
-     * Phase B: Will add login, logout, and protected routes.
+     *
+     * Authorization rules:
+     * - Public: /register, /login, /css/**, /h2-console/** (dev only)
+     * - Authenticated: /catalog, /cart/**, /checkout/**
+     *
+     * @param http HttpSecurity configuration
+     * @return SecurityFilterChain
+     * @throws Exception if configuration fails
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()  // Phase A: Allow all requests
+                // Public endpoints
+                .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
+                // Authenticated endpoints
+                .requestMatchers("/catalog", "/cart/**", "/checkout/**").authenticated()
+                // All other requests require authentication
+                .anyRequest().authenticated()
             )
-            .csrf(csrf -> csrf.disable())  // Disabled for Phase A (will enable in Phase B)
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/catalog", true)
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            )
+            // CSRF and frame options for H2 console (dev mode only)
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/h2-console/**")
+            )
             .headers(headers -> headers
-                .frameOptions(frame -> frame.sameOrigin())  // Allow H2 console
+                .frameOptions(frame -> frame.sameOrigin())
             );
-        
+
         return http.build();
     }
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Arts Equipment Rental</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>Arts Equipment Rental</h1>
+            <div class="nav-links">
+                <a th:href="@{/catalog}">Catalog</a>
+                <a th:href="@{/cart}">Cart</a>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-link">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2>Checkout</h2>
+        
+        <div class="checkout-container">
+            <div class="checkout-summary">
+                <h3>Order Summary</h3>
+                <p><strong>Customer:</strong> <span th:text="${username}">Username</span></p>
+                
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="entry : ${cartItems}">
+                            <td th:text="${entry.key.name}">Product Name</td>
+                            <td>€<span th:text="${#numbers.formatDecimal(entry.key.price, 1, 2)}">0.00</span>/day</td>
+                            <td th:text="${entry.value}">1</td>
+                            <td>€<span th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)}">0.00</span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><strong>Total:</strong></td>
+                            <td><strong>€<span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">0.00</span></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            
+            <div class="checkout-actions">
+                <p class="checkout-note">
+                    <strong>Note:</strong> This is a reservation system. Equipment will be reserved for pickup.
+                </p>
+                
+                <form th:action="@{/checkout/confirm}" method="post">
+                    <button type="submit" class="btn btn-primary btn-large">Confirm Reservation</button>
+                </form>
+                
+                <a th:href="@{/cart}" class="btn btn-secondary">Back to Cart</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

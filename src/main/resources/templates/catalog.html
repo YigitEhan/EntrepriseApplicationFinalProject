@@ -7,47 +7,49 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1>🎭 Arts Equipment Rental</h1>
-            <p>Browse and reserve professional equipment for your projects</p>
-        </div>
-    </header>
-
     <!-- Navigation -->
-    <nav>
+    <nav class="navbar">
         <div class="container">
-            <div>
-                <a href="/catalog">📦 Catalog</a>
-                <a href="/cart">🛒 Cart</a>
-            </div>
-            <div>
-                <a href="/login">🔐 Login</a>
-                <a href="/register">📝 Register</a>
+            <h1>Arts Equipment Rental</h1>
+            <div class="nav-links">
+                <a th:href="@{/catalog}" class="active">Catalog</a>
+                <a th:href="@{/cart}">Cart</a>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-link">Logout</button>
+                </form>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="container">
+        <h2>Equipment Catalog</h2>
+
+        <!-- Success/Error messages -->
+        <div th:if="${success}" class="alert alert-success">
+            <p th:text="${success}">Success message</p>
+        </div>
+        <div th:if="${error}" class="alert alert-error">
+            <p th:text="${error}">Error message</p>
+        </div>
+
         <!-- Filter Section -->
         <section class="filter-section">
-            <h2>🔍 Filter Equipment</h2>
-            <form class="filter-form" method="get" action="/catalog">
+            <h3>Filter by Category</h3>
+            <form class="filter-form" method="get" th:action="@{/catalog}">
                 <div style="flex: 1;">
-                    <label for="categoryId" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Category:</label>
+                    <label for="categoryId">Category:</label>
                     <select id="categoryId" name="categoryId">
                         <option value="">All Categories</option>
-                        <option th:each="category : ${categories}" 
-                                th:value="${category.id}" 
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
                                 th:text="${category.name}"
                                 th:selected="${selectedCategory != null && selectedCategory.id == category.id}">
                         </option>
                     </select>
                 </div>
-                <button type="submit">Apply Filter</button>
-                <a href="/catalog" style="padding: 0.75rem 1.5rem; background-color: #e0e0e0; color: #333; text-decoration: none; border-radius: 5px;">Clear</a>
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+                <a th:href="@{/catalog}" class="btn btn-secondary">Clear</a>
             </form>
         </section>
 
@@ -73,16 +75,19 @@
                     <div class="product-price">
                         €<span th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></span>/day
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button style="flex: 1; padding: 0.75rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
-                            Add to Cart
-                        </button>
-                        <span th:if="${product.available}" 
-                              style="padding: 0.75rem; background-color: #4caf50; color: white; border-radius: 5px; font-size: 0.9rem;">
+                    <div class="product-actions">
+                        <form th:action="@{/cart/add}" method="post" style="flex: 1;">
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary" th:disabled="${!product.available}">
+                                <span th:if="${product.available}">Add to Cart</span>
+                                <span th:unless="${product.available}">Unavailable</span>
+                            </button>
+                        </form>
+                        <span th:if="${product.available}" class="badge badge-success">
                             ✓ Available
                         </span>
-                        <span th:unless="${product.available}" 
-                              style="padding: 0.75rem; background-color: #f44336; color: white; border-radius: 5px; font-size: 0.9rem;">
+                        <span th:unless="${product.available}" class="badge badge-danger">
                             ✗ Unavailable
                         </span>
                     </div>
@@ -91,21 +96,11 @@
         </div>
 
         <!-- No Products Message -->
-        <div th:if="${#lists.isEmpty(products)}" style="text-align: center; padding: 3rem; background: white; border-radius: 10px;">
-            <h2 style="color: #999;">No products found</h2>
-            <p style="color: #666;">Try selecting a different category</p>
+        <div th:if="${#lists.isEmpty(products)}" class="empty-message">
+            <h3>No products found</h3>
+            <p>Try selecting a different category</p>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Arts Equipment Rental | University Project by Yigit</p>
-            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
-                Built with Spring Boot, Thymeleaf & H2 Database
-            </p>
-        </div>
-    </footer>
 </body>
 </html>
 
