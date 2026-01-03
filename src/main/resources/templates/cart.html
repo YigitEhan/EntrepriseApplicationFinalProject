@@ -9,20 +9,22 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <h1>Arts Equipment Rental</h1>
+            <h1>🎭 Arts Equipment Rental</h1>
             <div class="nav-links">
-                <a th:href="@{/catalog}">Catalog</a>
-                <a th:href="@{/cart}" class="active">Cart (<span th:text="${cartItemCount}">0</span>)</a>
+                <a th:href="@{/catalog}">📦 Catalog</a>
+                <a th:href="@{/cart}" class="active">🛒 Cart (<span th:text="${cartItemCount}">0</span>)</a>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button type="submit" class="btn-link">Logout</button>
+                    <button type="submit" class="btn-link">🚪 Logout</button>
                 </form>
             </div>
         </div>
     </nav>
     
     <div class="container">
-        <h2>Shopping Cart</h2>
-        
+        <div class="page-header">
+            <h2>🛒 Shopping Cart</h2>
+        </div>
+
         <!-- Success/Error messages -->
         <div th:if="${success}" class="alert alert-success">
             <p th:text="${success}">Success message</p>
@@ -30,11 +32,13 @@
         <div th:if="${error}" class="alert alert-error">
             <p th:text="${error}">Error message</p>
         </div>
-        
+
         <!-- Empty cart message -->
         <div th:if="${#maps.isEmpty(cartItems)}" class="empty-cart">
-            <p>Your cart is empty.</p>
-            <a th:href="@{/catalog}" class="btn btn-primary">Continue Shopping</a>
+            <div class="empty-icon">🛒</div>
+            <h3>Your cart is empty</h3>
+            <p>Add some equipment to get started!</p>
+            <a th:href="@{/catalog}" class="btn btn-primary btn-large">Browse Catalog</a>
         </div>
         
         <!-- Cart items -->
@@ -70,9 +74,9 @@
                     </tr>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td colspan="3"><strong>Total:</strong></td>
-                        <td colspan="2"><strong>€<span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">0.00</span></strong></td>
+                    <tr class="cart-total-row">
+                        <td colspan="3"><strong>Total (per day):</strong></td>
+                        <td colspan="2" class="cart-total-amount"><strong>€<span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">0.00</span></strong></td>
                     </tr>
                 </tfoot>
             </table>

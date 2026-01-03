@@ -1,31 +1,37 @@
 # 🎭 Arts Equipment Rental Platform
 
 **University Project - Enterprise Applications Course**  
-**Author:** Yigit (University Student)  
-**Version:** 1.0.0 (Phase A)
+**Author:** Yigit (ehb Student)  
+**Version:** 1.0.0 ()
 
 ---
 
 ## 📋 Project Overview
 
-This is a proof-of-concept web application for an arts education institute that allows registered students to browse, reserve, and "rent" equipment (lights, cables, stage elements, control panels, etc.) for their projects and final works.
+## Overview
+This project is a proof-of-concept web application developed for the course **Enterprise Applications**.
+It simulates a platform for an arts education institute where registered students can browse technical equipment
+and reserve items for projects via a shopping cart and checkout confirmation flow.
 
-### Key Features (Phase A - Completed)
-- ✅ Product catalog with 12 seeded products
-- ✅ Category-based filtering (4 categories)
-- ✅ Clean MVC architecture
-- ✅ JPA entities with proper relationships
-- ✅ H2 in-memory database
-- ✅ Thymeleaf templates
-- ✅ Responsive UI design
+The focus of this application is on:
+- data display and filtering
+- secure authentication
+- session handling
+- reservation flow (cart → confirmation)
 
-### Upcoming Features (Phase B)
-- 🔜 User registration & login
-- 🔜 Session-based authentication with BCrypt
-- 🔜 Shopping cart functionality
-- 🔜 Checkout & confirmation
+No real payments are implemented.
 
 ---
+
+
+### Key Features 
+
+- Product catalog with category filtering
+- User registration and secure login (Spring Security)
+- Password hashing using BCrypt
+- Session-based shopping cart
+- Checkout and confirmation page
+- Clean MVC architecture (Controller / Service / Repository)
 
 ## 🛠️ Technologies Used
 
@@ -138,7 +144,7 @@ The application automatically seeds the database on startup with:
 - **Stage Equipment:** Microphone Stand, Speaker Stand Pair, Fog Machine
 - **Control Panels:** DMX Controller 512, Audio Mixer 16-Channel, Lighting Console
 
-### Test User (for Phase B)
+### Test User 
 - **Username:** `student`
 - **Password:** `password123`
 - **Role:** USER
@@ -189,56 +195,13 @@ Category ← Product (One-to-Many)
 
 ## 🤖 AI Usage Transparency
 
-This project was developed with assistance from **Augment AI** (Claude Sonnet 4.5) as a learning tool for understanding Enterprise Application development.
+This project was developed with assistance from **chatgpt**  as a learning tool for understanding Enterprise Application development.
 
 ### AI-Assisted Components
-- ✅ Project structure and architecture design
-- ✅ Entity relationship modeling
 - ✅ Spring Security configuration patterns
-- ✅ Thymeleaf template structure
 - ✅ Code documentation and comments
 
-### Student-Owned Understanding
-- ✅ MVC pattern and layered architecture
-- ✅ JPA entity relationships and annotations
-- ✅ Spring Boot dependency injection
-- ✅ RESTful controller design
-- ✅ Database seeding strategies
 
-**Oral Defense Readiness:** I can explain every line of code, design decision, and architectural choice in this project.
-
----
-
-## 🎓 Oral Defense Cheat Sheet
-
-### Q: Why did you use BCrypt for password hashing?
-**A:** BCrypt is an industry-standard adaptive hashing function designed for passwords. It uses salted hashing to prevent rainbow table attacks and has an adjustable cost factor that can be increased as hardware improves. Unlike MD5 or SHA-1, BCrypt is specifically designed to be slow, making brute-force attacks computationally expensive.
-
-### Q: How does session-based authentication work?
-**A:** When a user logs in, Spring Security creates a session on the server and stores the user's authentication details. The server sends a session ID to the client as a cookie (JSESSIONID). On subsequent requests, the client sends this cookie, and Spring Security retrieves the session to authenticate the user. Sessions are stored in memory (default) or can be persisted to a database.
-
-### Q: How is the shopping cart stored?
-**A:** The cart is stored in the HttpSession object on the server. Each user's session maintains a cart object containing selected products. This approach is simple, secure (cart data never leaves the server), and doesn't require database persistence for temporary data.
-
-### Q: How does category filtering work?
-**A:** The catalog controller accepts an optional `categoryId` query parameter. If provided, it calls `productService.getProductsByCategory()`, which uses Spring Data JPA's query derivation to execute `SELECT * FROM products WHERE category_id = ?`. The filtered products are then passed to the Thymeleaf template for rendering.
-
-### Q: Why separate Controller, Service, and Repository layers?
-**A:** This follows the **Separation of Concerns** principle:
-- **Controller:** Handles HTTP (request/response), no business logic
-- **Service:** Contains business rules, reusable across controllers
-- **Repository:** Data access only, abstracts database operations
-
-Benefits: easier testing, maintainability, and scalability.
-
-### Q: Why use JPA instead of raw SQL?
-**A:** JPA (Java Persistence API) provides:
-- **Object-Relational Mapping (ORM):** Work with Java objects instead of SQL
-- **Database independence:** Switch databases without changing code
-- **Automatic query generation:** Spring Data JPA creates queries from method names
-- **Type safety:** Compile-time checking vs. runtime SQL errors
-
----
 
 ## 📝 License
 
@@ -264,5 +227,5 @@ Enterprise Applications Course - 2024
 
 ---
 
-**Last Updated:** Phase A Completion - January 2024
+**Last Updated:** january 2024
 

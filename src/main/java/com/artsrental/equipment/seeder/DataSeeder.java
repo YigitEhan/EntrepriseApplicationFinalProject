@@ -73,23 +73,23 @@ public class DataSeeder implements CommandLineRunner {
                 "LED Par Light 64",
                 "Professional RGB LED par light with DMX control",
                 new BigDecimal("15.00"),
-                "https://via.placeholder.com/300x200?text=LED+Par+Light",
+                "/images/lighting.svg",
                 lighting
             ));
-            
+
             productRepository.save(new Product(
                 "Fresnel Spotlight 1000W",
                 "Classic theater spotlight with barn doors",
                 new BigDecimal("25.00"),
-                "https://via.placeholder.com/300x200?text=Fresnel+Spotlight",
+                "/images/spotlight.svg",
                 lighting
             ));
-            
+
             productRepository.save(new Product(
                 "Moving Head Light",
                 "Intelligent moving head with gobo patterns",
                 new BigDecimal("45.00"),
-                "https://via.placeholder.com/300x200?text=Moving+Head",
+                "/images/projector.svg",
                 lighting
             ));
 
@@ -98,7 +98,7 @@ public class DataSeeder implements CommandLineRunner {
                 "XLR Cable 10m",
                 "Professional balanced audio cable",
                 new BigDecimal("5.00"),
-                "https://via.placeholder.com/300x200?text=XLR+Cable",
+                "/images/microphone.svg",
                 cables
             ));
 
@@ -106,7 +106,7 @@ public class DataSeeder implements CommandLineRunner {
                 "DMX Cable 5m",
                 "5-pin DMX cable for lighting control",
                 new BigDecimal("4.00"),
-                "https://via.placeholder.com/300x200?text=DMX+Cable",
+                "/images/mixer.svg",
                 cables
             ));
 
@@ -114,7 +114,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Power Extension 20m",
                 "Heavy-duty power extension cable",
                 new BigDecimal("8.00"),
-                "https://via.placeholder.com/300x200?text=Power+Cable",
+                "/images/speaker.svg",
                 cables
             ));
 
@@ -123,7 +123,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Microphone Stand",
                 "Adjustable boom microphone stand",
                 new BigDecimal("6.00"),
-                "https://via.placeholder.com/300x200?text=Mic+Stand",
+                "/images/tripod.svg",
                 stage
             ));
 
@@ -131,7 +131,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Speaker Stand Pair",
                 "Heavy-duty adjustable speaker stands (pair)",
                 new BigDecimal("12.00"),
-                "https://via.placeholder.com/300x200?text=Speaker+Stands",
+                "/images/easel.svg",
                 stage
             ));
 
@@ -139,7 +139,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Fog Machine",
                 "Professional fog machine with remote control",
                 new BigDecimal("30.00"),
-                "https://via.placeholder.com/300x200?text=Fog+Machine",
+                "/images/screen.svg",
                 stage
             ));
 
@@ -148,7 +148,7 @@ public class DataSeeder implements CommandLineRunner {
                 "DMX Controller 512",
                 "512-channel DMX lighting controller",
                 new BigDecimal("40.00"),
-                "https://via.placeholder.com/300x200?text=DMX+Controller",
+                "/images/canvas.svg",
                 control
             ));
 
@@ -156,7 +156,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Audio Mixer 16-Channel",
                 "Professional 16-channel mixing desk",
                 new BigDecimal("50.00"),
-                "https://via.placeholder.com/300x200?text=Audio+Mixer",
+                "/images/mixer.svg",
                 control
             ));
 
@@ -164,7 +164,7 @@ public class DataSeeder implements CommandLineRunner {
                 "Lighting Console",
                 "Advanced lighting control console with touchscreen",
                 new BigDecimal("75.00"),
-                "https://via.placeholder.com/300x200?text=Lighting+Console",
+                "/images/camera.svg",
                 control
             ));
 

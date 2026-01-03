@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -35,7 +35,7 @@ public class CartService {
     public Map<Long, Integer> getCart(HttpSession session) {
         Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute(CART_SESSION_KEY);
         if (cart == null) {
-            cart = new HashMap<>();
+            cart = new LinkedHashMap<>();
             session.setAttribute(CART_SESSION_KEY, cart);
         }
         return cart;
@@ -89,14 +89,14 @@ public class CartService {
      */
     public Map<Product, Integer> getCartItems(HttpSession session) {
         Map<Long, Integer> cart = getCart(session);
-        Map<Product, Integer> cartItems = new HashMap<>();
-        
+        Map<Product, Integer> cartItems = new LinkedHashMap<>();
+
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
-            productRepository.findById(entry.getKey()).ifPresent(product -> 
+            productRepository.findById(entry.getKey()).ifPresent(product ->
                 cartItems.put(product, entry.getValue())
             );
         }
-        
+
         return cartItems;
     }
     

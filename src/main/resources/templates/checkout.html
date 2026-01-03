@@ -9,19 +9,21 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <h1>Arts Equipment Rental</h1>
+            <h1>🎭 Arts Equipment Rental</h1>
             <div class="nav-links">
-                <a th:href="@{/catalog}">Catalog</a>
-                <a th:href="@{/cart}">Cart</a>
+                <a th:href="@{/catalog}">📦 Catalog</a>
+                <a th:href="@{/cart}">🛒 Cart</a>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button type="submit" class="btn-link">Logout</button>
+                    <button type="submit" class="btn-link">🚪 Logout</button>
                 </form>
             </div>
         </div>
     </nav>
-    
+
     <div class="container">
-        <h2>Checkout</h2>
+        <div class="page-header">
+            <h2>💳 Checkout</h2>
+        </div>
         
         <div class="checkout-container">
             <div class="checkout-summary">
@@ -46,9 +48,9 @@
                         </tr>
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colspan="3"><strong>Total:</strong></td>
-                            <td><strong>€<span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">0.00</span></strong></td>
+                        <tr class="cart-total-row">
+                            <td colspan="3"><strong>Total (per day):</strong></td>
+                            <td class="cart-total-amount"><strong>€<span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)}">0.00</span></strong></td>
                         </tr>
                     </tfoot>
                 </table>

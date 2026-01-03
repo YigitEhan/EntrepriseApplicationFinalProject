@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#667eea"/>
+  <circle cx="150" cy="120" r="40" fill="#fff" opacity="0.9"/>
+  <path d="M 130 160 L 150 120 L 170 160 Z" fill="#fff" opacity="0.8"/>
+  <rect x="140" y="160" width="20" height="60" fill="#fff" opacity="0.8"/>
+  <text x="150" y="250" font-family="Arial" font-size="20" fill="#fff" text-anchor="middle">Spotlight</text>
+</svg>
+
