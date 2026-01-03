@@ -9,7 +9,7 @@
     WORKDIR /app
     COPY --from=build /app/target/equipment-rental-1.0.0.jar app.jar
     
-    # Render geeft een PORT env var. We gebruiken die.
+    
     ENV PORT=8080
     EXPOSE 8080
     CMD ["sh", "-c", "java -Dserver.port=${PORT} -jar app.jar"]

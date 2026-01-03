@@ -231,6 +231,12 @@ This is a university project for educational purposes.
 
 ---
 
+## deployed
+Live demo URL (Render – free tier, may spin down)
+deployed on render hence why i used docker
+
+---
+
 ## 👨‍💻 Author
 
 **Yigit** - Ehb Student  
